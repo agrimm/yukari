@@ -1,8 +1,5 @@
 $: << File.join(__dir__, '..', 'lib', 'yukari')
 
-require 'simplecov'
-SimpleCov.start
-
 require 'test/unit'
 require 'ad'
 
