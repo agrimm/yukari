@@ -4,3 +4,4 @@ $:.unshift __dir__
 # SimpleCov.start
 
 require 'tc_ad'
+require 'tc_flatmate_search'
