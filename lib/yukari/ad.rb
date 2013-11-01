@@ -1,6 +1,6 @@
 require 'nokogiri'
 
-# Parser for Gumtree, to find a Japanese-speaking flatmate.
+# This already has a class description elsewhere.
 class Yukari
   # Parse HTML pages representing an ad.
   class AdParser
