@@ -2,6 +2,7 @@ GEM
   specs:
     ast (1.1.0)
     backports (3.3.3)
+    multi_json (1.8.2)
     parser (2.0.0.pre7)
       ast (~> 1.1)
       slop (~> 3.4, >= 3.4.5)
@@ -12,6 +13,10 @@ GEM
       parser (~> 2.0.0.pre6)
       powerpack (~> 0.0.6)
       rainbow (>= 1.1.4)
+    simplecov (0.7.1)
+      multi_json (~> 1.0)
+      simplecov-html (~> 0.7.1)
+    simplecov-html (0.7.1)
     slop (3.4.6)
 
 PLATFORMS
@@ -19,3 +24,4 @@ PLATFORMS
 
 DEPENDENCIES
   rubocop
+  simplecov
