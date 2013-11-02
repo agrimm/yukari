@@ -16,4 +16,11 @@ class TestFlatmateSearch < Test::Unit::TestCase
     failure_message = 'Something does not work'
     assert_equal 1, flatmate_search.matching_files.length, failure_message
   end
+
+  def test_flatmate_search_report
+    flatmate_search = create_flatmate_search
+    assert_nothing_raised do
+      flatmate_search.match_report_output
+    end
+  end
 end

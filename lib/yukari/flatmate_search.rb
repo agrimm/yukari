@@ -6,6 +6,7 @@ $:.unshift File.join(__dir__, '..', '..', '..', 'sumisu', 'lib')
 require 'ad'
 require 'frequency_comparer'
 require 'set'
+require 'forwardable'
 
 # This already has a description
 class Yukari
@@ -16,6 +17,7 @@ class Yukari
 
       @frequency_analyzer = create_frequency_analyzer
       @flatmate_evaluations = create_flatmate_evaluations
+      @match_report = create_match_report
     end
 
     def create_frequency_analyzer
@@ -39,11 +41,56 @@ class Yukari
     def matching_flatmates
       @flatmate_evaluations.find_all(&:matching?)
     end
+
+    def create_match_report
+      MatchReport.new(matching_flatmates)
+    end
+
+    def match_report_output
+      @match_report.to_s
+    end
+  end
+
+  # Display information about matching flatmates
+  class MatchReport
+    def initialize(flatmates)
+      @flatmates = flatmates
+
+      @individual_match_reports = create_individual_match_reports
+    end
+
+    def create_individual_match_reports
+      @flatmates.map(&method(:create_individual_match_report))
+    end
+
+    def create_individual_match_report(flatmate)
+      IndividualMatchReport.new(flatmate)
+    end
+
+    def to_s
+      individual_reports = @individual_match_reports.map(&:to_s)
+      individual_reports.join("\n")
+    end
+  end
+
+  # Display information about a single matching flatmate
+  class IndividualMatchReport
+    extend Forwardable
+
+    def_delegators :@flatmate, :filename, :matching_word
+
+    def initialize(flatmate)
+      @flatmate = flatmate
+    end
+
+    def to_s
+      [filename, 'has a match based on the word', matching_word].join(' ')
+    end
   end
 
   # Evaluation of an individual flatmate ad
   class FlatmateEvaluation
-    attr_reader :filename
+    attr_reader :filename, :matching_word
 
     def initialize(filename, frequency_analyzer)
       @filename = filename
