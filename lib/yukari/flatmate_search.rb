@@ -77,20 +77,21 @@ class Yukari
   class IndividualMatchReport
     extend Forwardable
 
-    def_delegators :@flatmate, :filename, :matching_word
+    def_delegators :@flatmate, :filename, :matching_words
 
     def initialize(flatmate)
       @flatmate = flatmate
     end
 
     def to_s
-      [filename, 'has a match based on the word', matching_word].join(' ')
+      matching_words_portion = matching_words.join(' ')
+      [filename, 'has a match based on the word', matching_words_portion].join(' ')
     end
   end
 
   # Evaluation of an individual flatmate ad
   class FlatmateEvaluation
-    attr_reader :filename, :matching_word
+    attr_reader :filename, :matching_words
 
     def initialize(filename, frequency_analyzer)
       @filename = filename
@@ -101,7 +102,7 @@ class Yukari
 
       # This part is still a bit uncertain.
       # I need to experiment a bit.
-      @matching_word = find_matching_word
+      @matching_words = find_matching_words
     end
 
     def create_ad_parser
@@ -113,12 +114,12 @@ class Yukari
       @ad_parser.parse_ad(@filename)
     end
 
-    def find_matching_word
-      @ad.words.find(&method(:predominantly_japanese?))
+    def find_matching_words
+      @ad.words.find_all(&method(:predominantly_japanese?)).uniq
     end
 
     def matching?
-      @matching_word
+      ! @matching_words.empty?
     end
 
     IGNORE_WORDS = Set.new(%w{Park Rafael Pedro})
