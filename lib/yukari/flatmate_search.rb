@@ -83,9 +83,13 @@ class Yukari
       @flatmate = flatmate
     end
 
-    def to_s
+    def cells
       matching_words_portion = matching_words.join(' ')
-      [filename, 'has a match based on the words', matching_words_portion].join(' ')
+      [filename, 'has a match based on the words', matching_words_portion]
+    end
+
+    def to_s
+      cells.join(' ')
     end
   end
 
