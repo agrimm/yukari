@@ -12,8 +12,3 @@ CollectionMethods:
 # Status: Rejected. $LOAD_PATH is not any better than $: to me.
 SpecialGlobalVars:
   Enabled: false
-
-# Status: Disputed design. I think other people have filed a bug
-#   about this.
-TrivialAccessors:
-  Enabled: false
