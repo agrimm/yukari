@@ -85,7 +85,7 @@ class Yukari
 
     def to_s
       matching_words_portion = matching_words.join(' ')
-      [filename, 'has a match based on the word', matching_words_portion].join(' ')
+      [filename, 'has a match based on the words', matching_words_portion].join(' ')
     end
   end
 
@@ -133,7 +133,7 @@ class Yukari
   end
 
   # Analyze frequency data for this application
-  # In particular, try to work out if a word suggets the flatmate
+  # In particular, try to work out if a word suggests the flatmate
   # may be Japanese-speaking.
   class FrequencyAnalyzer
     def initialize(australian_frequency_data, japanese_frequency_data)
