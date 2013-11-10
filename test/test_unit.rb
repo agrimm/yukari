@@ -5,3 +5,4 @@ $:.unshift __dir__
 
 require 'tc_ad'
 require 'tc_flatmate_search'
+require 'tc_spidering'
