@@ -7,8 +7,8 @@ require 'results'
 #   and detecting existing pages.
 class TestSpidering < Test::Unit::TestCase
   def test_spider_ad
-    results_filename = 'pages/first_results_page.html'
-    expected_link = '/s-ad/kingsgrove/houseshare/room-for-rent-at-kingsgrove-close-to-sydney-cbd/1000320712' # rubocop:disable LineLength
+    results_filename = 'test/data/exclude/first_results_page_20131111.html'
+    expected_link = '/s-ad/haymarket/flatshare-houseshare/sydney-city-sunny-room-looking-for-rent/1004749666' # rubocop:disable LineLength
     failure_message = "Can't find an ad from result"
 
     result_parser = Yukari::ResultParser.new
@@ -18,8 +18,8 @@ class TestSpidering < Test::Unit::TestCase
   end
 
   def test_spider_next_page
-    results_filename = 'pages/first_results_page.html'
-    expected_link = '/s-shared-accommodation/sydney/page-2/c18294l3003435'
+    results_filename = 'test/data/exclude/first_results_page_20131111.html'
+    expected_link = '/s-flatshare-houseshare/sydney/page-2/c18294l3003435'
     failure_message = "Can't find the next result page"
 
     result_parser = Yukari::ResultParser.new
@@ -29,7 +29,7 @@ class TestSpidering < Test::Unit::TestCase
   end
 
   def test_detect_existing_page
-    link = '/s-ad/castle-hill/other-shared-accommodation/looking-for-place-to-share-around-castle-hill/1004443184'
+    link = '/s-ad/haymarket/flatshare-houseshare/sydney-city-sunny-room-looking-for-rent/1004749666'
     failure_message = "Doesn't detect an existing page"
     result = Yukari::Result.new([], nil)
     refute result.link_is_new?(link), failure_message

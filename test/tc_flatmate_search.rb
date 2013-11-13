@@ -6,7 +6,7 @@ require 'flatmate_search'
 # Test for flatmate search.
 class TestFlatmateSearch < Test::Unit::TestCase
   def create_flatmate_search
-    ad_filename = 'test/data/exclude/ads/page_1.html'
+    ad_filename = 'test/data/exclude/ads/page_1_20131111.html'
     filenames = [ad_filename]
     Yukari::FlatmateSearch.new(filenames)
   end

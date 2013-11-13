@@ -6,13 +6,23 @@ class Yukari
   class ResultParser
     def parse_result(result_filename)
       document = Nokogiri::HTML(File.read(result_filename))
-      link_xpath = './/a[contains(@class, "rs-ad-title h-elips")]'
-      link_nodes = document.xpath(link_xpath)
-      links = link_nodes.map { |node| node['href'] }
+      links = parse_links(document)
+      fail if links.empty?
+      next_page_link = parse_next_page_link(document)
+      Result.new(links, next_page_link)
+    end
+
+    def parse_links(document)
+      h3_xpath = './/h3[contains(@class, "rs-ad-title h-elips")]'
+      h3_nodes = document.xpath(h3_xpath)
+      link_nodes = h3_nodes.map { |node| node.xpath('a').first }
+      link_nodes.map { |node| node['href'] }
+    end
+
+    def parse_next_page_link(document)
       next_page_link_xpath = './/a[contains(@title, "Next")]'
       next_page_link_node = document.xpath(next_page_link_xpath).first
-      next_page_link = next_page_link_node && next_page_link_node['href']
-      Result.new(links, next_page_link)
+      next_page_link_node && next_page_link_node['href']
     end
   end
 
