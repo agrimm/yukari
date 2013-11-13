@@ -126,7 +126,7 @@ class Yukari
       ! @matching_words.empty?
     end
 
-    IGNORE_WORDS = Set.new(%w{Park Rafael Pedro})
+    IGNORE_WORDS = Set.new(%w{Park Rafael Pedro in You do So Min He Go Sun An Man})
     HARDWIRED_WORDS = Set.new(%w{Japanese})
 
     def predominantly_japanese?(word)
