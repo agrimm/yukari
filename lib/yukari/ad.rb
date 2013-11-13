@@ -33,7 +33,7 @@ class Yukari
     end
 
     def create_ad(content)
-      words = content.split(/[ \r]/)
+      words = content.split(/[ \r.:,]/)
       Ad.new(words)
     end
   end
