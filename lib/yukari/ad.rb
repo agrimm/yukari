@@ -5,6 +5,7 @@ class Yukari
   # Parse HTML pages representing an ad.
   class AdParser
     def parse_ad(ad_filename)
+      # STDERR.puts "Parsing #{ad_filename.inspect}"
       document = Nokogiri::HTML(File.read(ad_filename))
       nodes = document.xpath('.//p')
       node = nodes.first
@@ -19,6 +20,7 @@ class Yukari
     attr_reader :words
     def initialize(words)
       @words = words
+      # STDERR.puts "Size is #{@words.size}"
     end
   end
 end
