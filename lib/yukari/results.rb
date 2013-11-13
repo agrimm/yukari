@@ -40,7 +40,7 @@ class Yukari
       url = 'http://www.gumtree.com.au' + link
       msg = "downloading #{url.inspect} and saving it to #{filename.inspect}"
       STDERR.puts msg
-      sleep 5
+      sleep 1.1
       page = open(url, &:read)
       File.open(filename, 'wb') { |file| file.puts(page) }
     end
