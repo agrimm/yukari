@@ -128,7 +128,9 @@ class Yukari
 
     IGNORE_WORDS = Set.new(%w{
       Park Rafael Pedro in You do So Min He Go Sun An Man
-      Date Take de Milk Kim Fernando Roberto
+      Date Take de Milk Kim Fernando Roberto Olga Oh Francisco
+      Maria Marie Giovanni Diego Rodrigo Csaba Bobby Ina Ma Jesus
+      Marco Antonio Andreas Mariano Viktor
     })
     HARDWIRED_WORDS = Set.new(%w{Japanese})
 
