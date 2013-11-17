@@ -2,8 +2,7 @@ $: << File.join(__dir__, '..', 'lib')
 
 require 'yukari'
 # Only require open uri in production code, not testing code
-# Temporarily commented out until confident about the code
-# require 'open-uri'
+require 'open-uri'
 
 if __FILE__ == $0
   Yukari.download_new_ads!
