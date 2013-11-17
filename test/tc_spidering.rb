@@ -13,8 +13,8 @@ class TestSpidering < Test::Unit::TestCase
 
     result_parser = Yukari::ResultParser.new
     result = result_parser.parse_result(results_filename)
-    links = result.links
-    assert links.include?(expected_link), failure_message
+    link = result.links.first.link
+    assert_equal expected_link, link, failure_message
   end
 
   def test_spider_next_page
@@ -29,9 +29,9 @@ class TestSpidering < Test::Unit::TestCase
   end
 
   def test_detect_existing_page
-    link = '/s-ad/haymarket/flatshare-houseshare/sydney-city-sunny-room-looking-for-rent/1004749666'
+    link_string = '/s-ad/haymarket/flatshare-houseshare/sydney-city-sunny-room-looking-for-rent/1004749666'
     failure_message = "Doesn't detect an existing page"
-    result = Yukari::Result.new([], nil)
-    refute result.link_is_new?(link), failure_message
+    link = Yukari::Result::Link.new_using_string(link_string)
+    refute link.new?, failure_message
   end
 end

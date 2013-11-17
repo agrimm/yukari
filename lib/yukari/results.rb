@@ -29,51 +29,75 @@ class Yukari
   # Information represented by a result page,
   #   plus the ability to download links.
   class Result
-    attr_reader :links, :next_page_link
+    # @return [String]
+    attr_reader :next_page_link
+    # @return [Array<Yukari::Result::Link>]
+    attr_reader :links
 
-    def initialize(links, next_page_link)
-      @links = links
+    def initialize(link_strings, next_page_link)
+      @link_strings = link_strings
       @next_page_link = next_page_link
+
+      @links = create_links
+    end
+
+    def create_links
+      @link_strings.map(&method(:create_link))
+    end
+
+    def create_link(link_string)
+      Link.new_using_string(link_string)
     end
 
     # Playing around with using a bang for something slightly dangerous
     def download_new_ads!
-      @links.each do |link|
-        download_link!(link)
+      @links.each(&:download!)
+    end
+
+    # A link from a Result page
+    class Link
+      attr_reader :link
+
+      def self.new_using_string(link)
+        new(link)
       end
-    end
 
-    def download_link!(link)
-      return unless link_is_new?(link)
-      id = parse_id_from_link(link)
-      filename = determine_filename_from_id(id)
-      url = 'http://www.gumtree.com.au' + link
-      msg = "downloading #{url.inspect} and saving it to #{filename.inspect}"
-      STDERR.puts msg
-      sleep 1.1
-      page = open(url, &:read)
-      File.open(filename, 'wb') { |file| file.puts(page) }
-    end
+      def initialize(link)
+        @link = link
 
-    def link_is_new?(link)
-      id = parse_id_from_link(link)
-      !id_already_saved?(id)
-    end
+        @id = determine_id
 
-    def id_already_saved?(id)
-      filename = determine_filename_from_id(id)
-      File.exist?(filename)
-    end
+        @output_filename = determine_output_filename
+        @absolute_url = determine_absolute_url
+      end
 
-    def parse_id_from_link(link)
-      strings = link.split('/')
-      id = strings.last
-      fail unless id =~ /^\d+$/
-      id
-    end
+      def determine_id
+        strings = @link.split('/')
+        id = strings.last
+        fail unless id =~ /^\d+$/
+        id
+      end
 
-    def determine_filename_from_id(id)
-      "pages/ads/#{id}.html"
+      def determine_output_filename
+        "pages/ads/#{@id}.html"
+      end
+
+      def determine_absolute_url
+        'http://www.gumtree.com.au' + @link
+      end
+
+      def new?
+        !File.exist?(@output_filename)
+      end
+
+      def download!
+        return unless new?
+        msg = "downloading #{@absolute_url.inspect} and saving it to #{@output_filename.inspect}"
+        STDERR.puts msg
+        sleep 1.1
+        page = open(url, &:read)
+        File.open(filename, 'wb') { |file| file.puts(page) }
+      end
     end
   end
 end
