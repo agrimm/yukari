@@ -1,4 +1,5 @@
 require 'nokogiri'
+# require 'fileutils'
 
 class Yukari
   # Given a results page, parse links to an ad,
@@ -52,6 +53,7 @@ class Yukari
     # Playing around with using a bang for something slightly dangerous
     def download_new_ads!
       @links.each(&:download!)
+      # @links.each(&:copy!)
     end
 
     # A link from a Result page
@@ -69,6 +71,7 @@ class Yukari
 
         @output_filename = determine_output_filename
         @absolute_url = determine_absolute_url
+        # @destination_filename = determine_destination_filename
       end
 
       def determine_id
@@ -86,6 +89,11 @@ class Yukari
         'http://www.gumtree.com.au' + @link
       end
 
+      # DESTINATION_FOLDER = 'pages/ads/sydney_flatshare_wanted_20131117/'
+      # def determine_destination_filename
+        # File.join(DESTINATION_FOLDER, "#{@id}.html")
+      # end
+
       def new?
         !File.exist?(@output_filename)
       end
@@ -98,6 +106,15 @@ class Yukari
         page = open(url, &:read)
         File.open(filename, 'wb') { |file| file.puts(page) }
       end
+
+      # def copy!
+        # return if copied?
+        # FileUtils.copy(@output_filename, @destination_filename)
+      # end
+
+      # def copied?
+        # File.exist?(@destination_filename)
+      # end
     end
   end
 end
