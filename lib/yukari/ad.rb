@@ -11,7 +11,7 @@ class Yukari
       ad_description_node = find_ad_description_node(document)
       sold_node = find_sold_node(document)
       fail 'sold but has a description' if sold_node && ad_description_node
-      fail 'neither sold nor has description' if (!sold_node && !ad_description_node)
+      fail 'neither sold nor has description' if !sold_node && !ad_description_node
       return NullAd.new if sold_node
       content = ad_description_node.content
       create_ad(content)

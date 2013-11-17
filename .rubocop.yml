@@ -9,6 +9,9 @@ CollectionMethods:
     detect: 'find'
     select: 'find_all'
 
+LineLength:
+  Max: 103
+
 # Status: Rejected. $LOAD_PATH is not any better than $: to me.
 SpecialGlobalVars:
   Enabled: false
