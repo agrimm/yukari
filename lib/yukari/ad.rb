@@ -5,6 +5,7 @@ class Yukari
   # Parse HTML pages representing an ad.
   class AdParser
     def parse_ad(ad_filename)
+      # return NullAd.new unless File.exist?(ad_filename)
       # STDERR.puts "Parsing #{ad_filename.inspect}"
       document = Nokogiri::HTML(File.read(ad_filename))
       ad_description_node = find_ad_description_node(document)
