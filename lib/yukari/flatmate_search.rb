@@ -149,7 +149,8 @@ class Yukari
       australian_frequency = @australian_frequency_data.frequency_for(word)
       japanese_frequency = @japanese_frequency_data.frequency_for(word)
       difference = japanese_frequency - australian_frequency
-      difference > 10
+      # difference > 10
+      difference > 2
     end
   end
 end
