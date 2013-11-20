@@ -16,9 +16,10 @@ class Yukari
 
   def self.download_new_ads!
     fail 'bin/ad_downloader results_page.html' if ARGV.empty?
-    results_filename = ARGV.first
-    result_parser = ResultParser.new
-    result = result_parser.parse_result(results_filename)
-    result.download_new_ads!
+    for results_filename in ARGV
+      result_parser = ResultParser.new
+      result = result_parser.parse_result(results_filename)
+      result.download_new_ads!
+    end
   end
 end
