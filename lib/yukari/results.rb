@@ -103,8 +103,8 @@ class Yukari
         msg = "downloading #{@absolute_url.inspect} and saving it to #{@output_filename.inspect}"
         STDERR.puts msg
         sleep 1.1
-        page = open(url, &:read)
-        File.open(filename, 'wb') { |file| file.puts(page) }
+        page = open(@absolute_url, &:read)
+        File.open(@output_filename, 'wb') { |file| file.puts(page) }
       end
 
       # def copy!
