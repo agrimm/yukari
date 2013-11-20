@@ -1,5 +1,5 @@
 require 'nokogiri'
-# require 'fileutils'
+require 'fileutils'
 
 class Yukari
   # Given a results page, parse links to an ad,
@@ -71,7 +71,7 @@ class Yukari
 
         @output_filename = determine_output_filename
         @absolute_url = determine_absolute_url
-        # @destination_filename = determine_destination_filename
+        @destination_filename = determine_destination_filename
       end
 
       def determine_id
@@ -93,10 +93,10 @@ class Yukari
       #  and for copying from one folder to another ought
       #  not to be in the same folder.
 
-      # DESTINATION_FOLDER = 'pages/ads/sydney_flatshare_wanted_20131117/'
-      # def determine_destination_filename
-        # File.join(DESTINATION_FOLDER, "#{@id}.html")
-      # end
+      DESTINATION_FOLDER = 'pages/ads/sydney_flatshare_wanted_20131120/'
+      def determine_destination_filename
+        File.join(DESTINATION_FOLDER, "#{@id}.html")
+      end
 
       def new?
         !File.exist?(@output_filename)
@@ -111,14 +111,14 @@ class Yukari
         File.open(@output_filename, 'wb') { |file| file.puts(page) }
       end
 
-      # def copy!
-        # return if copied?
-        # FileUtils.copy(@output_filename, @destination_filename)
-      # end
+      def copy!
+        return if copied?
+        FileUtils.copy(@output_filename, @destination_filename)
+      end
 
-      # def copied?
-        # File.exist?(@destination_filename)
-      # end
+      def copied?
+        File.exist?(@destination_filename)
+      end
     end
   end
 end
