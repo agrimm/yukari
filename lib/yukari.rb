@@ -6,7 +6,7 @@ require 'results'
 # Parser for Gumtree, to find a Japanese-speaking flatmate.
 class Yukari
   # AD_PAGE_GLOB = 'pages/ads/*'
-  AD_PAGE_GLOB = 'pages/ads/sydney_flatshare_wanted_20131117/*'
+  AD_PAGE_GLOB = 'pages/ads/sydney_flatshare_wanted_20131120/*'
 
   def self.find_flatmate
     filenames = Dir.glob(AD_PAGE_GLOB)
