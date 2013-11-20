@@ -89,6 +89,10 @@ class Yukari
         'http://www.gumtree.com.au' + @link
       end
 
+      # FIXME: Code for downloading from the internet,
+      #  and for copying from one folder to another ought
+      #  not to be in the same folder.
+
       # DESTINATION_FOLDER = 'pages/ads/sydney_flatshare_wanted_20131117/'
       # def determine_destination_filename
         # File.join(DESTINATION_FOLDER, "#{@id}.html")
