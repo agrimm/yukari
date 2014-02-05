@@ -9,6 +9,9 @@ CollectionMethods:
     detect: 'find'
     select: 'find_all'
 
+For:
+  EnforcedStyle: for
+
 LineLength:
   Max: 103
 
