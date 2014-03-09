@@ -9,11 +9,12 @@ class Yukari
       # STDERR.puts "Parsing #{ad_filename.inspect}"
       document = Nokogiri::HTML(File.read(ad_filename))
       ad_description_node = find_ad_description_node(document)
+      reply_form_name_node = find_reply_form_name_node(document)
       sold_node = find_sold_node(document)
       fail 'sold but has a description' if sold_node && ad_description_node
       fail 'neither sold nor has description' if !sold_node && !ad_description_node
       return NullAd.new if sold_node
-      content = ad_description_node.content
+      content = ad_description_node.content + ' ' + reply_form_name_node.content
       create_ad(content)
     end
 
@@ -21,6 +22,13 @@ class Yukari
       ad_description_xpath = './/div[contains(@id, "ad-description")]'
       ad_description_nodes = document.xpath(ad_description_xpath)
       ad_description_nodes.first
+    end
+
+    def find_reply_form_name_node(document)
+      reply_form_name_xpath = './/div[contains(@class, "reply-form-name")]'
+      reply_form_name_nodes = document.xpath(reply_form_name_xpath)
+      return NullReplyFormNameNode.new if reply_form_name_nodes.empty?
+      reply_form_name_nodes.first
     end
 
     def find_sold_node(document)
@@ -52,6 +60,13 @@ class Yukari
   class NullAd
     def words
       []
+    end
+  end
+
+  # A reply from name node couldn't be found
+  class NullReplyFormNameNode
+    def content
+      ''
     end
   end
 end
