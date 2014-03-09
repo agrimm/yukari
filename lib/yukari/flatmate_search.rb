@@ -4,7 +4,11 @@ $:.unshift __dir__
 $:.unshift File.join(__dir__, '..', '..', '..', 'sumisu', 'lib')
 
 require 'ad'
-require 'frequency_comparer'
+begin
+  require 'frequency_comparer'
+rescue LoadError
+  fail "Need to move sumisu repository to correct location"
+end
 require 'set'
 require 'forwardable'
 
