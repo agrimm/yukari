@@ -30,6 +30,7 @@ class TestSpidering < Test::Unit::TestCase
 
   def test_detect_existing_page
     link_string = '/s-ad/haymarket/flatshare-houseshare/sydney-city-sunny-room-looking-for-rent/1004749666'
+    fail 'broken assumption' unless File.exist?('pages/ads/1004749666.html')
     failure_message = "Doesn't detect an existing page"
     link = Yukari::Result::Link.new_using_string(link_string)
     refute link.new?, failure_message
