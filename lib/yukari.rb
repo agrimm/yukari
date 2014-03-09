@@ -10,6 +10,7 @@ class Yukari
 
   def self.find_flatmate
     filenames = Dir.glob(AD_PAGE_GLOB)
+    fail "No ads found in #{AD_PAGE_GLOB.inspect}" if filenames.empty?
     flatmate_search = FlatmateSearch.new(filenames)
     puts flatmate_search.match_report_output
   end
