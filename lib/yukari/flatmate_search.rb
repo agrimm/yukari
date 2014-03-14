@@ -133,6 +133,13 @@ class Yukari
       Date Take de Milk Kim Fernando Roberto Olga Oh Francisco
       Maria Marie Giovanni Diego Rodrigo Csaba Bobby Ina Ma Jesus
       Marco Antonio Andreas Mariano Viktor
+      adam alan alex alex american an and and andrew andy anthony antonio art artist bailey ban bart basketball battle ben bill billy bond born boyle
+      brazilian buddy campbell charlie chris christian chung clarissa coles colin dale date dave dee der designer dick du ever fields figure film
+      first ford french gareth gay gear george german gillespie go great guy hall harris hill hockey house ii im james jessica jim jimmy jo jon josh
+      justin king laura law lee leon list little living lloyd love m marco maria mark martin matt matthew max may min mine mitchell model money music
+      musician north of olivia park paul peter peters photographer prince producer ready rush ryan s sales scientist second service shane short simon
+      singh so son sophie south stairs store store sun susan t take taylor the third thomas tim tom van vicky video volleyball wendy west white will
+      wood writer yo you you young zero
     })
     HARDWIRED_WORDS = Set.new(%w{Japanese})
 
