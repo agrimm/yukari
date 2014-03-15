@@ -148,6 +148,7 @@ class Yukari
       singh so son sophie south stairs store store sun susan t take taylor the third thomas tim
       tom van vicky video volleyball wendy west white will
       wood writer yo you you young zero
+      water motorcycle Korean SO YOU TAKE Water Great
     })
     HARDWIRED_WORDS = Set.new(%w{Japanese})
 
