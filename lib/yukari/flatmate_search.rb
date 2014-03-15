@@ -167,7 +167,10 @@ class Yukari
       @japanese_frequency_data = japanese_frequency_data
     end
 
-    def predominantly_japanese?(word)
+    def predominantly_japanese?(original_word)
+      # This was previously not used. Presumably, the change is that the data files
+      # now are in all lowercase.
+      word = original_word.downcase
       australian_frequency = @australian_frequency_data.frequency_for(word)
       japanese_frequency = @japanese_frequency_data.frequency_for(word)
       difference = japanese_frequency - australian_frequency
