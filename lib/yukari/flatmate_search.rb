@@ -1,13 +1,13 @@
 $:.unshift __dir__
 
 # FIXME: Hacky
-$:.unshift File.join(__dir__, '..', '..', '..', 'sumisu', 'lib')
+$:.unshift File.join(__dir__, '..', '..', '..', 'yuzuki', 'lib', 'yuzuki')
 
 require 'ad'
 begin
-  require 'frequency_comparer'
+  require 'frequency_evaluator'
 rescue LoadError
-  fail "Need to move sumisu repository to correct location"
+  raise 'Need to move yuzuki repository to correct location'
 end
 require 'set'
 require 'forwardable'
@@ -25,9 +25,7 @@ class Yukari
     end
 
     def create_frequency_analyzer
-      australian_frequency_data = FrequencyComparer.australian_frequency_data
-      japanese_frequency_data = FrequencyComparer.japanese_frequency_data
-      FrequencyAnalyzer.new(australian_frequency_data, japanese_frequency_data)
+      Yuzuki::FrequencyAnalyzer.new_using_configuration
     end
 
     def create_flatmate_evaluations
@@ -156,27 +154,6 @@ class Yukari
       return false if IGNORE_WORDS.include?(word)
       return true if HARDWIRED_WORDS.include?(word)
       @frequency_analyzer.predominantly_japanese?(word)
-    end
-  end
-
-  # Analyze frequency data for this application
-  # In particular, try to work out if a word suggests the flatmate
-  # may be Japanese-speaking.
-  class FrequencyAnalyzer
-    def initialize(australian_frequency_data, japanese_frequency_data)
-      @australian_frequency_data = australian_frequency_data
-      @japanese_frequency_data = japanese_frequency_data
-    end
-
-    def predominantly_japanese?(original_word)
-      # This was previously not used. Presumably, the change is that the data files
-      # now are in all lowercase.
-      word = original_word.downcase
-      australian_frequency = @australian_frequency_data.frequency_for(word)
-      japanese_frequency = @japanese_frequency_data.frequency_for(word)
-      difference = japanese_frequency - australian_frequency
-      # difference > 10
-      difference > 2
     end
   end
 end
