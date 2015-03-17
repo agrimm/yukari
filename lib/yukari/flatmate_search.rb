@@ -147,6 +147,10 @@ class Yukari
       tom van vicky video volleyball wendy west white will
       wood writer yo you you young zero
       water motorcycle Korean SO YOU TAKE Water Great
+      I Hi Monika
+      June In A U No One Me China Fi Shire Scotland Don Non London Uni Note Jen Nintendo Sue
+      Ryan She Mango On Fun Miranda Canada Australia Ireland Italy Europe India Mike Home France
+      Taiwan Switzerland Asia Ben Nina Are Same Anna Some Natasha NOW Ii Anne Dee Shira
     })
     HARDWIRED_WORDS = Set.new(%w{Japanese})
 
