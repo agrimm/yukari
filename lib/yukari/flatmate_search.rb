@@ -152,7 +152,7 @@ class Yukari
       Ryan She Mango On Fun Miranda Canada Australia Ireland Italy Europe India Mike Home France
       Taiwan Switzerland Asia Ben Nina Are Same Anna Some Natasha NOW Ii Anne Dee Shira
     })
-    HARDWIRED_WORDS = Set.new(%w{Japanese})
+    HARDWIRED_WORDS = Set.new(%w{Japanese Japan})
 
     def predominantly_japanese?(word)
       return false if IGNORE_WORDS.include?(word)
