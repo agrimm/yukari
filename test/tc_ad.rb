@@ -14,6 +14,17 @@ class TestAdParser < Test::Unit::TestCase
     end
   end
 
+  def test_words_followed_by_exclamation_mark_split
+    ad_filename = 'test/data/exclude/ads/page_1_20150322.html'
+    expected_word = 'Japanese'
+    failure_message = "A word at the end of the sentence isn't parsed"
+
+    ad_parser = Yukari::AdParser.new
+    ad = ad_parser.parse_ad(ad_filename)
+
+    assert_include ad.words, expected_word, failure_message
+  end
+
   def test_handle_already_sold
     ad_filename = 'test/data/exclude/ads/already_sold_20131111.html'
     ad_parser = Yukari::AdParser.new

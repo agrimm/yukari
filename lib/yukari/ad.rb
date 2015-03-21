@@ -42,7 +42,8 @@ class Yukari
     end
 
     def create_ad(content)
-      words = content.split(/[ \r.:,]/)
+      # FIXME: Use a proper gem for natural language processing.
+      words = content.split(/\W+/)
       Ad.new(words)
     end
   end
