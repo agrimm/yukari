@@ -151,6 +151,11 @@ class Yukari
       June In A U No One Me China Fi Shire Scotland Don Non London Uni Note Jen Nintendo Sue
       Ryan She Mango On Fun Miranda Canada Australia Ireland Italy Europe India Mike Home France
       Taiwan Switzerland Asia Ben Nina Are Same Anna Some Natasha NOW Ii Anne Dee Shira
+      A ABC ACCESS AIM Access Africa DEAR Dear Emu Era HI Hai IGA MACHINE MAIN MAKE MEN
+      Machine Made Main Make NOW No None Now ONE One RUN Roman Scotland Sea Semi TO TOO
+      Ten To Too Use a abc abuse access age aim arise aware banana base be bin blues dear
+      hike i idea machine made main make men no none now raise sea semi shoe taken ten to
+      ton too undo use via
     }.map(&:downcase))
     HARDWIRED_WORDS = Set.new(%w{Japanese Japan}.map(&:downcase))
 
