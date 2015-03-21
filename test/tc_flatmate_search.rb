@@ -23,4 +23,13 @@ class TestFlatmateSearch < Test::Unit::TestCase
       flatmate_search.match_report_output
     end
   end
+
+  def test_lowercase_hardwired_word_detected
+    ad_filename = 'test/data/exclude/ads/page_1_20150321.html'
+    filenames = [ad_filename]
+    flatmate_search = Yukari::FlatmateSearch.new(filenames)
+
+    failure_message = "A lower case hardwired word isn't detected"
+    assert_equal 1, flatmate_search.matching_files.length, failure_message
+  end
 end

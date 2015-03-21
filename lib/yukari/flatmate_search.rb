@@ -151,13 +151,14 @@ class Yukari
       June In A U No One Me China Fi Shire Scotland Don Non London Uni Note Jen Nintendo Sue
       Ryan She Mango On Fun Miranda Canada Australia Ireland Italy Europe India Mike Home France
       Taiwan Switzerland Asia Ben Nina Are Same Anna Some Natasha NOW Ii Anne Dee Shira
-    })
-    HARDWIRED_WORDS = Set.new(%w{Japanese Japan})
+    }.map(&:downcase))
+    HARDWIRED_WORDS = Set.new(%w{Japanese Japan}.map(&:downcase))
 
     def predominantly_japanese?(word)
-      return false if IGNORE_WORDS.include?(word)
-      return true if HARDWIRED_WORDS.include?(word)
-      @frequency_analyzer.predominantly_japanese?(word)
+      downcased_word = word.downcase
+      return false if IGNORE_WORDS.include?(downcased_word)
+      return true if HARDWIRED_WORDS.include?(downcased_word)
+      @frequency_analyzer.predominantly_japanese?(downcased_word)
     end
   end
 end
