@@ -104,6 +104,7 @@ class Yukari
 
       def download!
         return unless new?
+        # return if @absolute_url.include?('1074556063')
         msg = "downloading #{@absolute_url.inspect} and saving it to #{@output_filename.inspect}"
         STDERR.puts msg
         sleep 1.1
