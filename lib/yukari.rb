@@ -1,7 +1,7 @@
 $:.unshift File.join(__dir__, 'yukari')
 
 require 'flatmate_search'
-require 'results'
+require 'result_parser'
 
 # Parser for Gumtree, to find a Japanese-speaking flatmate.
 class Yukari

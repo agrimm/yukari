@@ -1,7 +1,7 @@
 $: << File.join(__dir__, '..', 'lib', 'yukari')
 
 require 'test/unit'
-require 'results'
+require 'result_parser'
 
 # Tests spidering: finding ads, next pages,
 #   and detecting existing pages.
