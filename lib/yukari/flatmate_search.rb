@@ -3,7 +3,7 @@ $:.unshift __dir__
 # FIXME: Hacky
 $:.unshift File.join(__dir__, '..', '..', '..', 'sumisu', 'lib')
 
-require 'ad'
+require 'ad_parser'
 begin
   require 'frequency_comparer'
 rescue LoadError

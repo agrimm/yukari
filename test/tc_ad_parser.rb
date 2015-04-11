@@ -1,7 +1,7 @@
 $: << File.join(__dir__, '..', 'lib', 'yukari')
 
 require 'test/unit'
-require 'ad'
+require 'ad_parser'
 
 # Test for ad parser.
 class TestAdParser < Test::Unit::TestCase
