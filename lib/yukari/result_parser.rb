@@ -1,6 +1,6 @@
 $:.unshift __dir__
 
-require 'results'
+require 'result'
 require 'nokogiri'
 
 class Yukari
