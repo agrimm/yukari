@@ -81,7 +81,7 @@ class Yukari
   class IndividualMatchReport
     extend Forwardable
 
-    def_delegators :@flatmate, :filename, :matching_words
+    def_delegators :@flatmate, :filename, :matching_words, :price_string
 
     def initialize(flatmate)
       @flatmate = flatmate
@@ -91,6 +91,8 @@ class Yukari
       matching_words_portion = matching_words.join(' ')
       [
         filename,
+        'price',
+        price_string,
         'has a match based on the words',
         matching_words_portion
       ]
@@ -171,6 +173,10 @@ class Yukari
       return false if IGNORE_WORDS.include?(downcased_word)
       return true if HARDWIRED_WORDS.include?(downcased_word)
       @frequency_analyzer.predominantly_japanese?(downcased_word)
+    end
+
+    def price_string
+      @ad.price_string
     end
   end
 

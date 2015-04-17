@@ -12,10 +12,12 @@ class Yukari
       ad_description_node = find_ad_description_node(document)
       reply_form_name_node = find_reply_form_name_node(document)
       sold_node = find_sold_node(document)
+      price_node = find_price_node(document)
       validate(sold_node, ad_description_node)
       return NullAd.new if sold_node
       content = ad_description_node.content + ' ' + reply_form_name_node.content
-      create_ad(content)
+      price_string = price_node.content.strip
+      create_ad(content, price_string)
     end
 
     def find_ad_description_node(document)
@@ -41,15 +43,21 @@ class Yukari
       ad_expired_nodes.first
     end
 
+    def find_price_node(document)
+      price_node_xpath = '//div[contains(@itemprop, "price")]'
+      price_nodes = document.xpath(price_node_xpath)
+      price_nodes.first
+    end
+
     def validate(sold_node, ad_description_node)
       fail 'sold but has a description' if sold_node && ad_description_node
       fail 'neither sold nor has description' if !sold_node && !ad_description_node
     end
 
-    def create_ad(content)
+    def create_ad(content, price_string)
       # FIXME: Use a proper gem for natural language processing.
       words = content.split(/\W+/)
-      Ad.new(words)
+      Ad.new(words, price_string)
     end
   end
 
