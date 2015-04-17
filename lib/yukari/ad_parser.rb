@@ -8,14 +8,11 @@ class Yukari
   # Parse HTML pages representing an ad.
   class AdParser
     def parse_ad(ad_filename)
-      # return NullAd.new unless File.exist?(ad_filename)
-      # STDERR.puts "Parsing #{ad_filename.inspect}"
       document = Nokogiri::HTML(File.read(ad_filename))
       ad_description_node = find_ad_description_node(document)
       reply_form_name_node = find_reply_form_name_node(document)
       sold_node = find_sold_node(document)
-      fail 'sold but has a description' if sold_node && ad_description_node
-      fail 'neither sold nor has description' if !sold_node && !ad_description_node
+      validate(sold_node, ad_description_node)
       return NullAd.new if sold_node
       content = ad_description_node.content + ' ' + reply_form_name_node.content
       create_ad(content)
@@ -42,6 +39,11 @@ class Yukari
       ad_expired_xpath = './/div[contains(@id, "ad-expired")]'
       ad_expired_nodes = document.xpath(ad_expired_xpath)
       ad_expired_nodes.first
+    end
+
+    def validate(sold_node, ad_description_node)
+      fail 'sold but has a description' if sold_node && ad_description_node
+      fail 'neither sold nor has description' if !sold_node && !ad_description_node
     end
 
     def create_ad(content)

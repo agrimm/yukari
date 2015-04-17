@@ -89,7 +89,11 @@ class Yukari
 
     def cells
       matching_words_portion = matching_words.join(' ')
-      [filename, 'has a match based on the words', matching_words_portion]
+      [
+        filename,
+        'has a match based on the words',
+        matching_words_portion
+      ]
     end
 
     def to_s
