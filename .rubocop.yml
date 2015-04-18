@@ -15,6 +15,9 @@ For:
 LineLength:
   Max: 103
 
+MethodLength:
+  Max: 15
+
 # Status: Rejected. $LOAD_PATH is not any better than $: to me.
 SpecialGlobalVars:
   Enabled: false
