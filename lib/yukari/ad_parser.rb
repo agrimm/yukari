@@ -13,11 +13,13 @@ class Yukari
       reply_form_name_node = find_reply_form_name_node(document)
       sold_node = find_sold_node(document)
       price_node = find_price_node(document)
+      location_node = find_location_node(document)
       validate(sold_node, ad_description_node)
       return NullAd.new if sold_node
       content = ad_description_node.content + ' ' + reply_form_name_node.content
       price_string = price_node.content.strip
-      create_ad(content, price_string)
+      location = location_node.content
+      create_ad(content, price_string, location)
     end
 
     def find_ad_description_node(document)
@@ -49,15 +51,29 @@ class Yukari
       price_nodes.first
     end
 
+    def find_location_node(document)
+      c_inline_ul_node_xpath = '//ul[contains(@class, "c-inline")]'
+      c_inline_ul_node = document.at_xpath(c_inline_ul_node_xpath)
+      c_inline_ul_node_children = c_inline_ul_node.children
+      real_estate_index = c_inline_ul_node_children.find_index do |c_inline_ul_node_child|
+        a_node = c_inline_ul_node_child.children.first
+        next if a_node.nil?
+        content = a_node.content
+        content.strip == 'Real Estate'
+      end
+      smallest_location_c_inline_ul_node_child = c_inline_ul_node_children[real_estate_index - 2]
+      smallest_location_c_inline_ul_node_child.children.first
+    end
+
     def validate(sold_node, ad_description_node)
       fail 'sold but has a description' if sold_node && ad_description_node
       fail 'neither sold nor has description' if !sold_node && !ad_description_node
     end
 
-    def create_ad(content, price_string)
+    def create_ad(content, price_string, location)
       # FIXME: Use a proper gem for natural language processing.
       words = content.split(/\W+/)
-      Ad.new(words, price_string)
+      Ad.new(words, price_string, location)
     end
   end
 

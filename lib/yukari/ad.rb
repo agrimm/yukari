@@ -2,11 +2,12 @@
 class Yukari
   # Representation of an ad.
   class Ad
-    attr_reader :words, :price_string
-    def initialize(words, price_string)
+    attr_reader :words, :price_string, :location
+    def initialize(words, price_string, location)
       @words = words
       # STDERR.puts "Size is #{@words.size}"
       @price_string = price_string
+      @location = location
     end
   end
 

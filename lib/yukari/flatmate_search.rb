@@ -81,7 +81,7 @@ class Yukari
   class IndividualMatchReport
     extend Forwardable
 
-    def_delegators :@flatmate, :filename, :matching_words, :price_string
+    def_delegators :@flatmate, :filename, :matching_words, :price_string, :location
 
     def initialize(flatmate)
       @flatmate = flatmate
@@ -91,6 +91,8 @@ class Yukari
       matching_words_portion = matching_words.join(' ')
       [
         filename,
+        'of',
+        location,
         'price',
         price_string,
         'has a match based on the words',
@@ -177,6 +179,10 @@ class Yukari
 
     def price_string
       @ad.price_string
+    end
+
+    def location
+      @ad.location
     end
   end
 
