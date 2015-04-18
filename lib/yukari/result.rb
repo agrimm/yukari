@@ -78,12 +78,15 @@ class Yukari
 
       def download!
         return unless new?
-        # return if @absolute_url.include?('1074556063')
         msg = "downloading #{@absolute_url.inspect} and saving it to #{@output_filename.inspect}"
         STDERR.puts msg
         sleep 1.1
-        page = open(@absolute_url, &:read)
-        File.open(@output_filename, 'wb') { |file| file.puts(page) }
+        begin
+          page = open(@absolute_url, &:read)
+          File.open(@output_filename, 'wb') { |file| file.puts(page) }
+        rescue OpenURI::HTTPError
+          STDERR.puts "It didn't work"
+        end
       end
 
       def copy!
