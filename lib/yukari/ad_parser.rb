@@ -73,7 +73,18 @@ class Yukari
     def create_ad(content, price_string, location)
       # FIXME: Use a proper gem for natural language processing.
       words = content.split(/\W+/)
-      Ad.new(words, price_string, location)
+      price = parse_price_string(price_string)
+      Ad.new(words, price_string, price, location)
+    end
+
+    def parse_price_string(price_string)
+      return 0.0 if price_string == 'Negotiable'
+      return 0.0 if price_string == 'Swap/Trade'
+      return 0.0 if price_string == 'Free'
+      return 0.0 if price_string.include?(',')
+      return 0.0 if price_string.empty?
+      negotiable_removed = price_string.gsub("\xC2\xA0Negotiable", '')
+      Float(negotiable_removed[1..-1])
     end
   end
 
