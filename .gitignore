@@ -11,7 +11,9 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
-
+data
+pages
+results
 # YARD artifacts
 .yardoc
 _yardoc
