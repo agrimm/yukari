@@ -26,6 +26,7 @@ class TestFlatmateSearch < Test::Unit::TestCase
 
   def test_lowercase_hardwired_word_detected
     ad_filename = 'test/data/exclude/ads/page_1_20150321.html'
+    skip 'File not found' unless File.exist?(ad_filename)
     filenames = [ad_filename]
     flatmate_search = Yukari::FlatmateSearch.new(filenames)
 
