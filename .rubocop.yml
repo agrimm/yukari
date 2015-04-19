@@ -13,7 +13,7 @@ For:
   EnforcedStyle: for
 
 LineLength:
-  Max: 103
+  Max: 120
 
 MethodLength:
   Max: 15
