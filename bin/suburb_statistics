@@ -1,0 +1,5 @@
+$:.unshift File.join(__dir__, '..', 'lib')
+
+require 'yukari'
+
+Yukari.suburb_statistics if __FILE__ == $0

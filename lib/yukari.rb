@@ -2,6 +2,7 @@ $:.unshift File.join(__dir__, 'yukari')
 
 require 'flatmate_search'
 require 'result_parser'
+require 'suburb_statistics_query'
 
 # Parser for Gumtree, to find a Japanese-speaking flatmate.
 class Yukari
@@ -22,5 +23,11 @@ class Yukari
       result = result_parser.parse_result(results_filename)
       result.download_new_ads!
     end
+  end
+
+  def self.suburb_statistics
+    filenames = Dir.glob(AD_PAGE_GLOB)
+    fail "No ads found in #{AD_PAGE_GLOB.inspect}" if filenames.empty?
+    SuburbStatisticsQuery.run(filenames)
   end
 end
